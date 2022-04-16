@@ -29,7 +29,7 @@ const BlogList = (props) => {
                 <h2>{post.document.data.title}</h2>
                 <h3> {reformatDate(post.document.data.date)}</h3>
                 <p>
-                  <ReactMarkdown source={truncateSummary(post.document.content)} />
+                  <ReactMarkdown children={truncateSummary(post.document.content)} />
                 </p>
               </div>
             </li>
