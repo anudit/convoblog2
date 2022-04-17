@@ -1,23 +1,36 @@
-const { promises : fs } = require('fs')
-const path = require('path')
+
+const withPWA = require('next-pwa')
+const runtimeCaching = require('next-pwa/cache')
+const { PHASE_DEVELOPMENT_SERVER } = require('next/constants')
 
 
-module.exports = ({
-  poweredByHeader: false,
-  //  exportPathMap: async function() {
-  //   const routes = {
-  //     '/': { page : '/'},
-  //     "/info": { page: "/info"}
-  //   }
+module.exports =(phase) => {
 
-  //   const postsDirectory = path.join(process.cwd(), 'posts')
-  //   const filenames = await fs.readdir(postsDirectory);
-  //   filenames.forEach(blog => {
-  //     let fn =  blog.replace('.md', '');
-  //     routes[`/blog/${fn}`] = { page: `/blog/[postid]`, query: { postid: fn } };
-  //   });
+  let baseConfig = {
+    experimental: {
+      esmExternals: false
+    },
 
-  //   console.log('routes', routes);
-  //   return routes
-  // }
-});
+  }
+
+  if (phase === PHASE_DEVELOPMENT_SERVER) {
+    return {
+      ...baseConfig,
+    }
+  }
+  else {
+    return withPWA({
+      ...baseConfig,
+      pwa: {
+        dest: 'public',
+        runtimeCaching,
+        maximumFileSizeToCacheInBytes: 10000000
+      },
+      experimental: {
+        esmExternals: false,
+        optimizeCss: true
+      },
+      poweredByHeader: false
+    })
+  }
+};
