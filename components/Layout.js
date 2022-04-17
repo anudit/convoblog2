@@ -2,6 +2,11 @@ import Header from "./Header";
 import Meta from './Meta'
 
 export default function Layout(props) {
+
+  const defaultDescription = "CUPOC - Driven by Curiosity, POssibility and Creativity to re-invent the internet, one block at a time.";
+  const defaultTitle = "Blog | CUPOC";
+  const defaultImage = "poster.png";
+
   return (
     <section
     className={`layout ${
@@ -14,10 +19,11 @@ export default function Layout(props) {
     }}
   >
     <Meta
-      siteTitle={props.siteTitle}
-      siteDescription={props.siteDescription}
+      siteTitle={props?.siteTitle || defaultTitle}
+      siteDescription={props?.siteDescription || defaultDescription}
+      siteImage={"https://blog.cupoc.space"+(props?.siteImage || defaultImage)}
     />
-    <Header siteTitle={props.siteTitle} />
+    <Header siteTitle={props?.siteTitle || defaultTitle} />
     <div className="content">{props.children}</div>
     <style jsx>
       {`

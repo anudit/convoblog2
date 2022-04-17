@@ -57,7 +57,7 @@ export default function BlogTemplate(props) {
   const frontmatter = props.data
 
   return (
-    <Layout siteTitle={props.siteTitle}>
+    <Layout siteTitle={frontmatter.title} siteImage={frontmatter.hero_image}>
     <article className="blog">
         <figure className="blog__hero">
         <img

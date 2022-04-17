@@ -1,13 +1,23 @@
 import Head from 'next/head'
 
 export default function Meta(props) {
+
     return (
         <>
             <Head>
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <meta charSet="utf-8" />
                 <title>{props.siteTitle}</title>
-                <meta name="Description" content={props.description}></meta>
+                <meta name="Description" content={props?.siteDescription} />
+                <meta name="description" content={props?.siteDescription} />
+                <meta name="og:description" content={props?.siteDescription} />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:image" content={props?.siteImage} />
+                <meta name="twitter:site:domain" content="blog.cupoc.space" />
+                <meta name="twitter:url" content="https://blog.cupoc.space/" />
+                <meta name="og:title" content={props?.siteTitle} />
+                <meta name="og:image" content={props?.siteImage} />
+
             </Head>
             <style jsx global>
                 {`

@@ -8,7 +8,7 @@ import path from 'path'
 
 const Index = (props) => {
   return (
-    <Layout pathname="/" siteTitle={props.title} siteDescription={props.description}>
+    <Layout pathname="/" siteTitle="CUPOC">
       <section>
         <BlogList allBlogs={props.allBlogs}/>
       </section>
