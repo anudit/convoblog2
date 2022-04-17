@@ -3,6 +3,9 @@ import matter from 'gray-matter'
 import Layout from "../components/Layout";
 import BlogList from "../components/BlogList";
 
+import { promises as fs } from 'fs'
+import path from 'path'
+
 const Index = (props) => {
   return (
     <Layout pathname="/" siteTitle={props.title} siteDescription={props.description}>
@@ -15,35 +18,35 @@ const Index = (props) => {
 
 export default Index;
 
-export async function getStaticProps(ctx) {
+export async function getStaticProps() {
 
-  const siteConfig = await import(`../data/config.json`)
-   //get posts & context from folder
-   const posts = (context => {
-    const keys = context.keys();
-    const values = keys.map(context);
-    const data = keys.map((key, index) => {
-      // Create slug from filename
-      const slug = key
-        .replace(/^.*[\\\/]/, "")
-        .split(".")
-        .slice(0, -1)
-        .join(".");
-        const value = values[index];
-      // Parse yaml metadata & markdownbody in document
-      let document = matter(value.default);
-      if(document?.data?.date) {
-        document.data.date = document.data.date.toString()
-      };
-      delete document.orig;
+  const postsDirectory = path.join(process.cwd(), 'posts')
+  const filenames = await fs.readdir(postsDirectory);
 
-      return {
-        document,
-        slug
-      };
+  let posts = [];
+
+  for (let index = 0; index < filenames.length; index++) {
+    const filename = filenames[index];
+    const filePath = path.join(postsDirectory, filename)
+    const fileContents = await fs.readFile(filePath, 'utf8')
+
+    let document = matter(fileContents);
+    if(document?.data?.date) {
+      document.data.date = document.data.date.toString()
+    };
+    delete document.orig;
+
+    const fn = filename.replace('.md', '');
+
+    posts.push({
+      document,
+      slug: fn,
     });
-    return data;
-  })(require.context("../posts", true, /\.md$/));
+
+  }
+
+  let siteConfig = await fs.readFile(`${process.cwd()}/data/config.json`);
+  siteConfig = JSON.parse(siteConfig);
 
   return {
     props: {

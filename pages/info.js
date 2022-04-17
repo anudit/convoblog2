@@ -1,6 +1,8 @@
 import Layout from "../components/Layout";
 import matter from "gray-matter";
 import ReactMarkdown from "react-markdown";
+import { promises as fs } from 'fs'
+import path from 'path'
 
 export default function Info(props) {
   const frontmatter = props.data
@@ -34,9 +36,11 @@ export default function Info(props) {
 
 export async function getStaticProps(context) {
 
-  const content = await import(`../data/info.md`)
-  const config = await import(`../data/config.json`)
-  const data = matter(content.default)
+  let config = await fs.readFile(`${process.cwd()}/data/config.json`);
+  config = JSON.parse(config);
+
+  let content = await fs.readFile(`${process.cwd()}/data/info.md`);
+  const data = matter(content)
 
   return {
     props: {
