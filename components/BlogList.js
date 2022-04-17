@@ -15,7 +15,7 @@ const BlogList = (props) => {
   return (
     <>
       <ul className="list">
-        {props.allBlogs.length > 1 && props.allBlogs.map(post => (
+        {props.allBlogs.length > 0 && props.allBlogs.map(post => (
           <Link
             key={post.slug}
             href={{ pathname: `/blog/${post.slug}` }}

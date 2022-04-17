@@ -4,6 +4,54 @@ import ReactMarkdown from "react-markdown";
 
 import Layout from '../../components/Layout'
 
+export async function getServerSideProps(context) {
+
+  const { id } = context.params;
+  const content = await import(`../../posts/${id}.md`)
+  const config = await import(`../../data/config.json`)
+  let data = matter(content.default);
+
+  if(data?.data?.date) {
+    data.data.date = data.data.date.toString()
+  };
+
+  return {
+    props: {
+      siteTitle: config.title,
+      ...data
+    }
+  }
+}
+
+
+
+// export async function getStaticPaths() {
+
+//   const stData = (context => {
+//     const keys = context.keys();
+//     const paths = keys.map((key, index) => {
+//       // Create slug from filename
+//       const slug = key
+//         .replace(/^.*[\\\/]/, "")
+//         .split(".")
+//         .slice(0, -1)
+//         .join(".");
+
+//         return { params: { slug } }
+//     });
+
+//     return {
+//       paths,
+//       fallback: false
+//     };
+
+//   })(require.context("../../posts", true, /\.md$/));
+
+//   return stData;
+// }
+
+
+
 export default function BlogTemplate(props) {
   function reformatDate(fullDate) {
     const date = new Date(fullDate)
@@ -169,13 +217,4 @@ export default function BlogTemplate(props) {
 
 }
 
-BlogTemplate.getInitialProps = async function(ctx) {
-  const { slug } = ctx.query
-  const content = await import(`../../posts/${slug}.md`)
-  const config = await import(`../../data/config.json`)
-  const data = matter(content.default);
-  return {
-    siteTitle: config.title,
-    ...data
-  }
-}
+

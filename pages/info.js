@@ -32,14 +32,16 @@ export default function Info(props) {
   );
 }
 
+export async function getStaticProps(context) {
 
-Info.getInitialProps = async function() {
   const content = await import(`../data/info.md`)
   const config = await import(`../data/config.json`)
   const data = matter(content.default)
 
   return {
-    title: config.title,
-    ...data
+    props: {
+      title: config.title,
+      ...data
+    }
   }
 }

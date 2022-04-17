@@ -7,7 +7,7 @@ sections:
 - type: heading
   label: Content
 - type: directory
-  path: src/posts
+  path: posts
   label: Blog Posts
   create: documents
   match: "**/*"
@@ -15,18 +15,18 @@ sections:
 - type: heading
   label: Config
 - type: document
-  path: src/data/config.json
+  path: data/config.json
   label: Site Info
 - type: document
-  path: src/data/info.md
+  path: data/info.md
   label: Info Page
-upload_dir: src/public
-public_path: src/public
+upload_dir: public
+public_path: public
 front_matter_path: ''
 use_front_matter_path: false
 file_template: ":filename:"
 build:
-  preview_output_directory: src/.next
+  preview_output_directory: .next
   install_dependencies_command: yarn install
   preview_docker_image: node:10
   mount_path: "/srv"

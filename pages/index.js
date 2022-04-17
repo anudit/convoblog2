@@ -15,7 +15,8 @@ const Index = (props) => {
 
 export default Index;
 
-Index.getInitialProps = async function() {
+export async function getStaticProps(ctx) {
+
   const siteConfig = await import(`../data/config.json`)
    //get posts & context from folder
    const posts = (context => {
@@ -28,9 +29,14 @@ Index.getInitialProps = async function() {
         .split(".")
         .slice(0, -1)
         .join(".");
-      const value = values[index];
+        const value = values[index];
       // Parse yaml metadata & markdownbody in document
-      const document = matter(value.default);
+      let document = matter(value.default);
+      if(document?.data?.date) {
+        document.data.date = document.data.date.toString()
+      };
+      delete document.orig;
+
       return {
         document,
         slug
@@ -40,7 +46,9 @@ Index.getInitialProps = async function() {
   })(require.context("../posts", true, /\.md$/));
 
   return {
-    allBlogs: posts,
-    ...siteConfig,
+    props: {
+      allBlogs: posts,
+      ...siteConfig,
+    }
   }
 }
