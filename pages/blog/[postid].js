@@ -2,15 +2,20 @@ import * as React from 'react'
 import matter from "gray-matter";
 import ReactMarkdown from "react-markdown";
 
+import { promises as fs } from 'fs'
+import path from 'path'
+
 import Layout from '../../components/Layout'
 
 export async function getStaticProps(context) {
 
+  let postid = context.params.postid;
 
-    let postid = context.params.postid;
-    const content = await import(`../../posts/${postid}.md`)
+    const content = await fs.readFile(`${process.cwd()}/posts/${postid}.md`);
+
+    // const content = await import(`../../posts/${postid}.md`)
     const config = await import(`../../data/config.json`)
-    let data = matter(content.default);
+    let data = matter(content);
 
     if(data?.data?.date) {
       data.data.date = data.data.date.toString()
@@ -23,32 +28,23 @@ export async function getStaticProps(context) {
         ...data
       }
     }
-
 }
 
 export async function getStaticPaths() {
 
-  const stData = (context => {
-    const keys = context.keys();
-    const paths = keys.map((key, index) => {
-      // Create slug from filename
-      const slug = key
-        .replace(/^.*[\\\/]/, "")
-        .split(".")
-        .slice(0, -1)
-        .join(".");
+  const postsDirectory = path.join(process.cwd(), 'posts')
+  const filenames = await fs.readdir(postsDirectory);
+  const paths = filenames.map((filename) => {
+    return { params: { postid: filename.replace('.md', '') } };
+  })
 
-        return { params: { postid: slug } }
-    });
+  console.log('\n\n posts', paths);
 
-    return {
-      paths,
-      fallback: false
-    };
+  return {
+    paths,
+    fallback: false
+  };
 
-  })(require.context("../../posts", true, /\.md$/));
-
-  return stData;
 }
 
 
@@ -218,3 +214,6 @@ export default function BlogTemplate(props) {
 }
 
 
+// export default function BlogTemplate(props) {
+//   return (JSON.stringify(props))
+// }
