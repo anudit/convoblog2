@@ -13,7 +13,6 @@ export async function getStaticProps(context) {
 
     const content = await fs.readFile(`${process.cwd()}/posts/${postid}.md`);
 
-    // const content = await import(`../../posts/${postid}.md`)
     const config = await import(`../../data/config.json`)
     let data = matter(content);
 

@@ -2,7 +2,6 @@ import Layout from "../components/Layout";
 import matter from "gray-matter";
 import ReactMarkdown from "react-markdown";
 import { promises as fs } from 'fs'
-import path from 'path'
 
 export default function Info(props) {
   const frontmatter = props.data

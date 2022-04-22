@@ -18,9 +18,9 @@ class MyDocument extends Document {
           />
           <link
             rel="icon"
-            type="image/png"
+            type="image/svg+xml"
             sizes="192x192"
-            href="/icon-192x192.png"
+            href="/favicon.svg"
           />
 
         </Head>

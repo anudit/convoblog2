@@ -8,7 +8,7 @@ specifiers:
   prettier: ^2.6.2
   react: ^18.0.0
   react-dom: ^18.0.0
-  react-markdown: ^8.0.2
+  react-markdown: ^8.0.3
   webpack: ^5.72.0
 
 dependencies:
@@ -18,7 +18,7 @@ dependencies:
   next-pwa: 5.5.2_next@12.1.5+webpack@5.72.0
   react: 18.0.0
   react-dom: 18.0.0_react@18.0.0
-  react-markdown: 8.0.2_react@18.0.0
+  react-markdown: 8.0.3_react@18.0.0
   webpack: 5.72.0
 
 devDependencies:
@@ -3218,8 +3218,8 @@ packages:
     resolution: {integrity: sha512-yUcBYdBBbo3QiPsgYDcfQcIkGZHfxOaoE6HLSnr1sPzMhdyxusbfKOSUbSd/ocGi32dxcj366PsTj+5oggeKKw==}
     dev: false
 
-  /react-markdown/8.0.2_react@18.0.0:
-    resolution: {integrity: sha512-WeXeDlCPFZBbN75AiLVEmN4gC6pNWadsZVWWxWpvrYQnUTHsB3l1PH60I1sbxTJr0oWOQc3zhxTrRQMTceNifw==}
+  /react-markdown/8.0.3_react@18.0.0:
+    resolution: {integrity: sha512-We36SfqaKoVNpN1QqsZwWSv/OZt5J15LNgTLWynwAN5b265hrQrsjMtlRNwUvS+YyR3yDM8HpTNc4pK9H/Gc0A==}
     peerDependencies:
       '@types/react': '>=16'
       react: '>=16'
