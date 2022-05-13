@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start --port $PORT",
     "export": "next export",
     "deploy": "pnpm build && pnpm export",
     "forestry-preview": "next dev -p 8080 -H 0.0.0.0",
