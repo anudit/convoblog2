@@ -15,7 +15,7 @@ const BlogList = (props) => {
   return (
     <>
       <ul className="list">
-        {props.allBlogs.length > 0 && props.allBlogs.map(post => (
+        {props.allBlogs.length > 0 && props.allBlogs.sort((a, b) => { return new Date(b.document.data.date) - new Date(a.document.data.date) }).map(post => (
           <Link
             key={post.slug}
             href={{ pathname: `/blog/${post.slug}` }}
@@ -29,7 +29,7 @@ const BlogList = (props) => {
                 <h2>{post.document.data.title}</h2>
                 <h3> {reformatDate(post.document.data.date)}</h3>
                 <p>
-                  <ReactMarkdown children={truncateSummary(post.document.content)} />
+                  <ReactMarkdown children={truncateSummary(post.document.content) + "..."} />
                 </p>
               </div>
             </li>

@@ -6,19 +6,7 @@ import BlogList from "../components/BlogList";
 import { promises as fs } from 'fs'
 import path from 'path'
 
-const Index = (props) => {
-  return (
-    <Layout pathname="/" siteTitle="CUPOC">
-      <section>
-        <BlogList allBlogs={props.allBlogs}/>
-      </section>
-    </Layout>
-  );
-};
-
-export default Index;
-
-export async function getStaticProps() {
+export async function getServerSideProps() {
 
   const postsDirectory = path.join(process.cwd(), 'posts')
   const filenames = await fs.readdir(postsDirectory);
@@ -55,3 +43,16 @@ export async function getStaticProps() {
     }
   }
 }
+
+
+const Index = (props) => {
+  return (
+    <Layout pathname="/" siteTitle="CUPOC">
+      <section>
+        <BlogList allBlogs={props.allBlogs}/>
+      </section>
+    </Layout>
+  );
+};
+
+export default Index;
