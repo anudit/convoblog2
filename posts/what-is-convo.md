@@ -1,7 +1,7 @@
 ---
 title: What is Convo?
 author: Manvi Singh
-date: 2021-09-19T00:00:00.000+00:00
+date: 2021-09-19T00:00:00.000+00:01
 hero_image: /convo-art.webp
 ---
 
