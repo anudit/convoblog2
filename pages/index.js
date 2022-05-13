@@ -6,7 +6,7 @@ import BlogList from "../components/BlogList";
 import { promises as fs } from 'fs'
 import path from 'path'
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
 
   const postsDirectory = path.join(process.cwd(), 'posts')
   const filenames = await fs.readdir(postsDirectory);
