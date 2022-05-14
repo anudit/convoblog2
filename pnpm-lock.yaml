@@ -5,6 +5,7 @@ specifiers:
   gray-matter: ^4.0.3
   next: ^12.1.6
   next-pwa: ^5.5.2
+  preact: ^10.7.2
   prettier: ^2.6.2
   react: '17'
   react-dom: '17'
@@ -16,6 +17,7 @@ dependencies:
   gray-matter: 4.0.3
   next: 12.1.6_react-dom@17.0.2+react@17.0.2
   next-pwa: 5.5.2_next@12.1.6+webpack@5.72.1
+  preact: 10.7.2
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   react-markdown: 8.0.3_react@17.0.2
@@ -3209,6 +3211,10 @@ packages:
       nanoid: 3.3.4
       picocolors: 1.0.0
       source-map-js: 1.0.2
+    dev: false
+
+  /preact/10.7.2:
+    resolution: {integrity: sha512-GLjn0I3r6ka+NvxJUppsVFqb4V0qDTEHT/QxHlidPuClGaxF/4AI2Qti4a0cv3XMh5n1+D3hLScW10LRIm5msQ==}
     dev: false
 
   /prettier/2.6.2:
