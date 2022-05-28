@@ -41,7 +41,16 @@ module.exports =(phase) => {
         esmExternals: false,
         optimizeCss: true
       },
-      poweredByHeader: false
+      poweredByHeader: false,
+      redirects: () => {
+        return [
+          {
+            "source": "/blog/:path",
+            "destination": "/:path",
+            "permanent": true
+          },
+        ]
+      }
     })
   }
 };
