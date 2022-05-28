@@ -1,11 +1,10 @@
 import * as React from 'react'
 import matter from "gray-matter";
 import ReactMarkdown from "react-markdown";
-
 import { promises as fs } from 'fs'
 import path from 'path'
 
-import Layout from '../../components/Layout'
+import Layout from '../components/Layout'
 
 export async function getStaticProps(context) {
 
@@ -13,7 +12,7 @@ export async function getStaticProps(context) {
 
     const content = await fs.readFile(`${process.cwd()}/posts/${postid}.md`);
 
-    const config = await import(`../../data/config.json`)
+    const config = await import(`../data/config.json`)
     let data = matter(content);
 
     if(data?.data?.date) {
@@ -37,7 +36,7 @@ export async function getStaticPaths() {
     return { params: { postid: filename.replace('.md', '') } };
   })
 
-  console.log('\n\n posts', paths);
+  // console.log('\n\n posts', paths);
 
   return {
     paths,
@@ -69,7 +68,7 @@ export default function BlogTemplate(props) {
         <h3>{reformatDate(frontmatter.date)} - {frontmatter.author} </h3>
         </div>
         <div className="blog__body">
-        <ReactMarkdown children={markdownBody} />
+          <ReactMarkdown children={markdownBody} />
         </div>
         {/* <h2 className="blog__footer">
         Written By:

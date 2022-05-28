@@ -19,10 +19,19 @@ export async function getStaticProps() {
     const fileContents = await fs.readFile(filePath, 'utf8')
 
     let document = matter(fileContents);
+
+    // to fix JSONifying an Object.
     if(document?.data?.date) {
       document.data.date = document.data.date.toString()
     };
     delete document.orig;
+
+    // trim the summary to required length to reduce the bundle load size.
+    let trimmedContentForummary = document.content.split(' ').slice(0, 30).join(' ');
+    document.content = trimmedContentForummary;
+
+
+    // console.log(document.content);
 
     const fn = filename.replace('.md', '');
 
